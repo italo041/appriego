@@ -1,3 +1,4 @@
+import 'package:appriego/src/models/area_model.dart';
 import 'package:flutter/material.dart';
 import 'package:appriego/src/providers/menu_provider.dart';
 import 'package:appriego/src/utils/icono_string_util.dart';
@@ -6,13 +7,14 @@ import 'package:appriego/src/utils/icono_string_util.dart';
 
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+   final AreaModel area;
+   HomePage(this.area);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Riego APP"),
+        title: Text(area.areaNombre),
         backgroundColor: Colors.lightGreen[400],
       ),
       body: _lista()
@@ -53,6 +55,8 @@ class HomePage extends StatelessWidget {
         onTap: () {
 
           Navigator.pushNamed(context, opt['ruta']);
+
+          
 
           // final route = MaterialPageRoute(
           //   builder: (context) =>  ParametrosPage(),
