@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -19,12 +20,14 @@ class EstadisticasHumedadPage extends StatefulWidget {
 }
 
 class _EstadisticasHumedadPageState extends State<EstadisticasHumedadPage> {
-  String url =
-      "http://190.117.72.184:3009/riego/1";
+   
 
   List dataJSON;
 
-  Future<String> getCoinsTimeSeries() async {
+  Future<String> getCoinsTimeSeries(String date) async {
+    String url =
+      "http://190.117.72.184:3009/riego/fecha/1/$date";
+
     var response = await http
         .get(Uri.encodeFull(url), headers: {"Accept": "application/json","content-type":"application/json"});
 
@@ -32,23 +35,29 @@ class _EstadisticasHumedadPageState extends State<EstadisticasHumedadPage> {
       var extractdata = json.decode(response.body);
       dataJSON = extractdata["riegos"];
       var now = new DateTime.now();
-      
+
+      if(dataJSON.length > 0){
       var date = dataJSON[1]['riego_fecha_ini'];
       var parseDate = DateTime.parse(date);
       var formatear = new DateFormat('dd,MM,yyyy');
        
       String formated = formatear.format(parseDate);
 
-      
-      
+
 
       print(formated);
+      }
+      
+      
     });
   }
 
   @override
   void initState() {
-    this.getCoinsTimeSeries();
+     DateTime now = DateTime.now();
+    var formateado = new DateFormat('yyyy-MM-dd');
+    String formated = formateado.format(now);
+    this.getCoinsTimeSeries(formated);
     
     
   }
@@ -92,6 +101,28 @@ class _EstadisticasHumedadPageState extends State<EstadisticasHumedadPage> {
       ),
     );
 
+
+    var datepicker = new RaisedButton(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      color: Colors.lightGreen[400],
+        onPressed: () {
+          DatePicker.showDatePicker(context,
+            showTitleActions: true,
+            minTime: DateTime(2000, 1, 1),
+            maxTime: DateTime(2022, 12, 31),
+            onChanged: (date) {print('change $date');},
+            onConfirm: (date) {
+              
+              var formateado = new DateFormat('yyyy-MM-dd');
+              String formatedd = formateado.format(date);
+              print('confirm $formatedd');
+              getCoinsTimeSeries(formatedd);
+              },
+            currentTime: DateTime.now(), locale: LocaleType.en);},
+      child: Text('Elija la fecha',),textColor: Colors.white
+    );
+    
+
     return Scaffold(
       appBar: new AppBar(title: new Text("Humedad suelo"),backgroundColor: Colors.lightGreen[400]),
       body: new Center(
@@ -101,6 +132,7 @@ class _EstadisticasHumedadPageState extends State<EstadisticasHumedadPage> {
             new Text(
               'Humedad del suelo con respecto al tiempo (%):   ',
             ),
+            datepicker,
             chartWidget,
           ],
         ),

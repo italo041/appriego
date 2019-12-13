@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -20,13 +21,15 @@ class UsoAguaPage extends StatefulWidget {
 
 class _UsoAguaPageState extends State<UsoAguaPage> {
 
-  String url =
-      "http://190.117.72.184:3009/riego/on/1";
+   
 
   List dataJSON;
   double agua_total = 0.00;
 
-  Future getAguaTimeSeries() async {
+  Future getAguaTimeSeries(String date) async {
+    String url =
+      "http://190.117.72.184:3009/riego/fecha/1/$date";
+
     var response = await http
         .get(Uri.encodeFull(url), headers: {"Accept": "application/json","content-type":"application/json"});
 
@@ -38,8 +41,11 @@ class _UsoAguaPageState extends State<UsoAguaPage> {
   }
 @override
   void initState() {
-    this.getAguaTimeSeries();
     
+    DateTime now = DateTime.now();
+    var formateado = new DateFormat('yyyy-MM-dd');
+    String formated = formateado.format(now);
+    this.getAguaTimeSeries(formated);
     
   }
 
@@ -95,6 +101,28 @@ class _UsoAguaPageState extends State<UsoAguaPage> {
       ),
     );
 
+
+    var datepicker = new RaisedButton(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+      color: Colors.lightGreen[400],
+        onPressed: () {
+          DatePicker.showDatePicker(context,
+            showTitleActions: true,
+            minTime: DateTime(2000, 1, 1),
+            maxTime: DateTime(2022, 12, 31),
+            onChanged: (date) {print('change $date');},
+            onConfirm: (date) {
+              
+              var formateado = new DateFormat('yyyy-MM-dd');
+              String formatedd = formateado.format(date);
+              print('confirm $formatedd');
+              getAguaTimeSeries(formatedd);
+              },
+            currentTime: DateTime.now(), locale: LocaleType.en);},
+      child: Text('Elija la fecha',),textColor: Colors.white
+    );
+
+
     return Scaffold(
       appBar: new AppBar(title: new Text("Uso del agua"),backgroundColor: Colors.lightGreen[400]),
       body: new Center(
@@ -104,6 +132,7 @@ class _UsoAguaPageState extends State<UsoAguaPage> {
             new Text(
               'Uso del agua con respecto al tiempo (ml):   ',
             ),
+            datepicker,
             chartWidget,
             Container(
               padding: EdgeInsets.all(25),

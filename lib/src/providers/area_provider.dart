@@ -25,4 +25,19 @@ class AreaProvider {
     print(areas.length);
     return areas;
   }
+
+
+   Future insertarArea(body ) async {
+
+    final url = '$_url/area/insertar';
+
+    final resp = await http.post(url,body:jsonEncode(body),
+     headers: {"content-type": "application/json","accept" : "application/json"}).then((response){
+       if(response.statusCode == 200){
+         print("Se registro los datos");
+       }
+    });
+
+    
+  }
 }

@@ -28,6 +28,7 @@ dependencies:
   charts_flutter: ^0.8.1
   intl: ^0.16.0
   flutter_launcher_icons: "^0.7.3"
+  flutter_datetime_picker: 1.2.5
 flutter_icons:
   android: true 
   ios: true

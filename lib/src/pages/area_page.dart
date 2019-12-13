@@ -18,7 +18,8 @@ class AreaPage extends StatelessWidget {
         title: Text("Riego APP"),
         backgroundColor: Colors.lightGreen[400],
       ),
-      body: _crearListado()
+      body: _crearListado(),
+      floatingActionButton: _crearBoton(context)
     );
   }
 
@@ -49,4 +50,17 @@ class AreaPage extends StatelessWidget {
       },
     );
   }
+
+
+
+
+
+  _crearBoton(BuildContext context) {
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: () => Navigator.pushNamed(context, 'crearArea'),
+      backgroundColor: Colors.lightGreen[400],
+    );
+  }
+
 }

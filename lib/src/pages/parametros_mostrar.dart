@@ -1,11 +1,11 @@
  
+import 'package:appriego/src/models/area_model.dart';
 import 'package:appriego/src/pages/parametros_page.dart';
 import 'package:appriego/src/providers/parametros_provider.dart';
 import 'package:flutter/material.dart';
 
 
 class ParametrosPageInicial extends StatefulWidget {
- 
   @override
   _ParametrosPageInicialState createState() => _ParametrosPageInicialState();
 }
@@ -17,7 +17,7 @@ class _ParametrosPageInicialState extends State<ParametrosPageInicial> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tus parametros"),
+        title: Text("Tus parametros "),
         backgroundColor: Colors.lightGreen[400],
       ),
       body: _crearListado() 

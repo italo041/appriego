@@ -1,3 +1,4 @@
+import 'package:appriego/src/pages/crear_area_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:appriego/src/pages/area_page.dart';
@@ -12,6 +13,7 @@ Map <String, WidgetBuilder> getApplicationRoutes(){
         'parametros' : (BuildContext context) => ParametrosPageInicial(),
         'modoriego' : (BuildContext context) => ModoriegoPage(),
         'estadisticas' : (BuildContext context) => EstadisticasPage(),
+        'crearArea' : (BuildContext context) => CrearAreaPage(),
 
 };
 }

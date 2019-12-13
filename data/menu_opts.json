@@ -7,11 +7,6 @@
             "texto": "Parametros"
         },
         {
-            "ruta" : "modoriego",
-            "icon" : "settings_applications",
-            "texto": "Modos de riego"
-        },
-        {
             "ruta" : "estadisticas",
             "icon" : "assessment",
             "texto": "Estadisticas"
