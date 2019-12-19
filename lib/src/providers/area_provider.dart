@@ -40,4 +40,17 @@ class AreaProvider {
 
     
   }
+
+  Future borrarArea(body) async {
+    final url = '$_url/area/borrar';
+    
+    final resp = await http.post(url,body:jsonEncode(body),
+    headers: {"content-type": "application/json","accept" : "application/json"}).then((response){
+       if(response.statusCode == 200){
+         print("Se borro el area");
+       }
+    });
+
+     
+  }
 }
