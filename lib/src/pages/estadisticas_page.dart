@@ -5,7 +5,8 @@ import 'package:appriego/src/pages/uso_agua_page.dart';
 import 'package:flutter/material.dart';
 
 class EstadisticasPage extends StatelessWidget {
-   
+    final int areacod;
+  EstadisticasPage(this.areacod);
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,9 @@ class EstadisticasPage extends StatelessWidget {
             onTap: (){
                
 
-              final route = MaterialPageRoute(
-                builder: (context) =>  ItemDetailsPage(),
-              );
-              Navigator.push(context, route);
+              Navigator.push(context, 
+                  new MaterialPageRoute(builder: (context)=> ItemDetailsPage(areacod))
+                  ); 
             },
           ),
           Divider(),
@@ -36,11 +36,10 @@ class EstadisticasPage extends StatelessWidget {
             trailing: Icon(Icons.keyboard_arrow_right,color:Colors.lightGreen[400]),
             onTap: (){
                
-
-              final route = MaterialPageRoute(
-                builder: (context) =>  EstadisticasHumedadPage(),
-              );
-              Navigator.push(context, route);
+ 
+               Navigator.push(context, 
+                  new MaterialPageRoute(builder: (context)=> EstadisticasHumedadPage(areacod))
+                  ); 
             },
           ),
           
@@ -52,10 +51,11 @@ class EstadisticasPage extends StatelessWidget {
             onTap: (){
                
 
-              final route = MaterialPageRoute(
-                builder: (context) =>  UsoAguaPage(),
-              );
-              Navigator.push(context, route);
+             
+
+              Navigator.push(context, 
+                  new MaterialPageRoute(builder: (context)=> UsoAguaPage(areacod))
+                  ); 
             },
           ),
           

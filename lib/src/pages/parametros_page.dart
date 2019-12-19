@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 
 class ParametrosPage extends StatefulWidget {
 
-   
+   final int areacod;
+
+  ParametrosPage(this.areacod);
 
   @override
   _ParametrosPageState createState() => _ParametrosPageState();
@@ -23,7 +25,7 @@ class _ParametrosPageState extends State<ParametrosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Parametros"),
+        title: Text("Parametros ${widget.areacod}"),
         backgroundColor: Colors.lightGreen[400],
       ),
       body: SingleChildScrollView(
@@ -142,7 +144,7 @@ class _ParametrosPageState extends State<ParametrosPage> {
     print(parametros.tempMaxAmbiente);
 
     var objeto = {
-      "area_cod":1,
+      "area_cod":widget.areacod,
       "hum_min_tierra":parametros.humMinTierra,
       "temp_min_ambiente":parametros.tempMinAmbiente,
       "temp_max_ambiente":parametros.tempMaxAmbiente,
@@ -180,7 +182,7 @@ class _ParametrosPageState extends State<ParametrosPage> {
   _submitParametrosDefecto(BuildContext context) {
 
     var objeto = {
-      "area_cod":1,
+      "area_cod":widget.areacod,
       "hum_min_tierra":30,
       "temp_min_ambiente":30,
       "temp_max_ambiente":30,

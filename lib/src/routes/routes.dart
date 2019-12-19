@@ -10,9 +10,7 @@ import 'package:appriego/src/pages/parametros_page.dart';
 Map <String, WidgetBuilder> getApplicationRoutes(){
  return <String,WidgetBuilder> {
         '/' : (BuildContext context) => AreaPage(),
-        'parametros' : (BuildContext context) => ParametrosPageInicial(),
         'modoriego' : (BuildContext context) => ModoriegoPage(),
-        'estadisticas' : (BuildContext context) => EstadisticasPage(),
         'crearArea' : (BuildContext context) => CrearAreaPage(),
 
 };

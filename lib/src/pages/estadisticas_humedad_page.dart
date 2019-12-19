@@ -15,6 +15,9 @@ class TimeSeriesSales {
 }
 
 class EstadisticasHumedadPage extends StatefulWidget {
+  final int areacod;
+  EstadisticasHumedadPage(this.areacod);
+
   @override
   _EstadisticasHumedadPageState createState() => new _EstadisticasHumedadPageState();
 }
@@ -26,7 +29,7 @@ class _EstadisticasHumedadPageState extends State<EstadisticasHumedadPage> {
 
   Future<String> getCoinsTimeSeries(String date) async {
     String url =
-      "http://190.117.72.184:3009/riego/fecha/1/$date";
+      "http://190.117.72.184:3009/riego/fecha/${widget.areacod}/$date";
 
     var response = await http
         .get(Uri.encodeFull(url), headers: {"Accept": "application/json","content-type":"application/json"});

@@ -6,15 +6,20 @@ import 'package:flutter/material.dart';
 
 
 class ParametrosPageInicial extends StatefulWidget {
+  final int areacod;
+  ParametrosPageInicial(this.areacod);
+  
+  
   @override
   _ParametrosPageInicialState createState() => _ParametrosPageInicialState();
 }
 
 class _ParametrosPageInicialState extends State<ParametrosPageInicial> {
   final parametroProvider = new ParametrosProvider();
-
+  
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("Tus parametros "),
@@ -30,7 +35,7 @@ class _ParametrosPageInicialState extends State<ParametrosPageInicial> {
 
   Widget _crearListado() {
     return FutureBuilder(
-      future: parametroProvider.cargarParametros(1),
+      future: parametroProvider.cargarParametros(widget.areacod),
       builder: (BuildContext context,AsyncSnapshot snapshot){
         if(snapshot.hasData){
           return ListView.builder(
@@ -109,7 +114,7 @@ class _ParametrosPageInicialState extends State<ParametrosPageInicial> {
       icon: Icon(Icons.refresh),
       onPressed:()   {
         Navigator.push(context, 
-                  new MaterialPageRoute(builder: (context)=> ParametrosPage())
+                  new MaterialPageRoute(builder: (context)=> ParametrosPage(widget.areacod))
                   );
       },
     );

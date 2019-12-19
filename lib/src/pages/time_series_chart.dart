@@ -15,6 +15,9 @@ class TimeSeriesSales {
 }
 
 class ItemDetailsPage extends StatefulWidget {
+final int areacod;
+  ItemDetailsPage(this.areacod);
+
   @override
   _ItemDetailsPageState createState() => new _ItemDetailsPageState();
 }
@@ -26,7 +29,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
 
   Future<String> getCoinsTimeSeries(String date) async {
       String url =
-      "http://190.117.72.184:3009/riego/fecha/1/$date";
+      "http://190.117.72.184:3009/riego/fecha/${widget.areacod}/$date";
 
       print(date);
 

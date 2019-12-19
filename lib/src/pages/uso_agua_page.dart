@@ -15,6 +15,9 @@ class TimeSeriesAgua {
 }
 
 class UsoAguaPage extends StatefulWidget {
+
+  final int areacod;
+  UsoAguaPage(this.areacod);
   @override
   _UsoAguaPageState createState() => _UsoAguaPageState();
 }
@@ -28,7 +31,7 @@ class _UsoAguaPageState extends State<UsoAguaPage> {
 
   Future getAguaTimeSeries(String date) async {
     String url =
-      "http://190.117.72.184:3009/riego/fecha/1/$date";
+      "http://190.117.72.184:3009/riego/fecha/${widget.areacod}/$date";
 
     var response = await http
         .get(Uri.encodeFull(url), headers: {"Accept": "application/json","content-type":"application/json"});
